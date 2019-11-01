@@ -21,6 +21,11 @@ namespace Data
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<DataAccessServices.Interfaces.ITodoItemService, DataAccessServices.TodoItemService>();
+            services.AddSingleton<DataAccessServices.Interfaces.ITodoItemStatusHistoryService, DataAccessServices.TodoItemStatusHistoryService>();
+
+
+
+
             services.AddSingleton<BusinessLogicServices.Interfaces.ITodoItemService, BusinessLogicServices.TodoItemService>();
 
             services.AddControllers();
