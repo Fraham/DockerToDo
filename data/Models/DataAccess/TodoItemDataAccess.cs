@@ -1,6 +1,6 @@
-namespace Data.Models
+namespace Data.Models.DataAccess
 {
-    public class TodoItem : BaseModel
+    public class TodoItemDataAccess : BaseModel
     {
         public string Title { get; set; }
 

@@ -1,6 +1,6 @@
-namespace Data.Models
+namespace Data.Models.DataAccess
 {
-    public class TodoItemStatusHistory : BaseModel
+    public class TodoItemStatusHistoryDataAccess : BaseModel
     {
         public string TodoItemId { get; set; }
 
