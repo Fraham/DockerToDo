@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  data:
+    depends_on:
+      - 'mongo'
+    build: ./data
+    links:
+      - mongo
+    ports:
+      - "8080:80"
+    tty: true
+    stdin_open: true
+    environment:
+      - MONGO_CONN=mongodb://mongo:27017/cof
+    container_name: todo-list-docker-data
+    restart: always
+
+  mongo:
+    image: mongo
+    volumes:
+      - 'mongo:/data/db'
+
+volumes:
+  mongo:
