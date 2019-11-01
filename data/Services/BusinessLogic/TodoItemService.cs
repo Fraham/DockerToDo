@@ -5,8 +5,11 @@ using Data.Services.BusinessLogic.Interfaces;
 using Microsoft.Extensions.Logging;
 using DataAccessLayer = Data.Services.DataAccess.Interfaces;
 using System.Linq;
+using System;
+using Data.Models.DataAccess;
+using Data.Models;
 
-namespace Data.Services.BusinessLogic 
+namespace Data.Services.BusinessLogic
 {
     public class TodoItemService : BaseService, ITodoItemService
     {
@@ -25,6 +28,26 @@ namespace Data.Services.BusinessLogic
             var history = _todoItemStatusHistoryService.Retrieve().GroupBy(h => h.TodoItemId).ToDictionary(g => g.Key, g => g.ToList());
 
             return TodoItemMapper.ToController(items, history);
+        }
+
+        public TodoItemRetrieve Create(TodoItemCreate item)
+        {
+            var now = DateTime.UtcNow;
+            var status = TodoItemStatus.Pending;
+
+            var objectToCreate = TodoItemMapper.ToDataAccess(item, now, status);
+
+            var createdThing = _todoItemService.Create(objectToCreate);
+
+            var history = _todoItemStatusHistoryService.Create(new TodoItemStatusHistoryDataAccess
+            {
+                TodoItemId = createdThing.Id,
+                Status = status,
+                CreatedDate = now,
+                LastUpdatedDate = now
+            });
+
+            return TodoItemMapper.ToController(createdThing, new List<TodoItemStatusHistoryDataAccess> { history });
         }
     }
 }

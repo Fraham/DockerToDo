@@ -6,5 +6,7 @@ namespace Data.Services.BusinessLogic.Interfaces
     public interface ITodoItemService
     {
         IEnumerable<TodoItemRetrieve> GetAll();
+
+        TodoItemRetrieve Create(TodoItemCreate item);
     }
 }

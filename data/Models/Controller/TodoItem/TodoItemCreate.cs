@@ -5,6 +5,5 @@ namespace Data.Models.Controller.TodoItem
         public string Title { get; set; }
 
         public string Description { get; set; }
-
     }
 }

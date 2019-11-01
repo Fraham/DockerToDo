@@ -43,11 +43,9 @@ namespace Data.Controllers
         [HttpPost]
         public ActionResult<TodoItemRetrieve> Create(TodoItemCreate todoItem)
         {
-            /*var createdItem = _TodoItemService.Create(TodoItem);
+            var createdItem = _itemService.Create(todoItem);
 
-            return CreatedAtRoute("GetTodoItem", new { id = createdItem.Id.ToString() }, createdItem);*/
-
-            return null;
+            return CreatedAtRoute("GetTodoItem", new { id = createdItem.Id.ToString() }, createdItem);
         }
 
         [HttpPut("{id:length(24)}")]

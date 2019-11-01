@@ -1,5 +1,8 @@
+using System.Text.Json.Serialization;
+
 namespace Data.Models
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum TodoItemStatus
     {
         Pending = 0,
