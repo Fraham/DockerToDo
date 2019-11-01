@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Data.Models.DataAccess;
 
 namespace Data.Services.DataAccess.Interfaces
@@ -6,7 +7,9 @@ namespace Data.Services.DataAccess.Interfaces
     {
         TodoItemDataAccess Create(TodoItemDataAccess item);
 
-        TodoItemDataAccess Retreive(string id);
+        TodoItemDataAccess Retrieve(string id);
+
+        IEnumerable<TodoItemDataAccess> Retrieve();
 
         void Update(string id, TodoItemDataAccess updatedItem);
 

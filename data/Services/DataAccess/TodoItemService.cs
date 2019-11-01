@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging;
 using Data.Models.DataAccess;
 using MongoDB.Driver;
 using Data.Services.DataAccess.Interfaces;
+using System.Collections.Generic;
 
 namespace Data.Services.DataAccess
 {
@@ -21,7 +22,7 @@ namespace Data.Services.DataAccess
             return item;
         }
 
-        public TodoItemDataAccess Retreive(string id)
+        public TodoItemDataAccess Retrieve(string id)
         {
             return _items.Find<TodoItemDataAccess>(item => item.Id == id).FirstOrDefault();
         }
@@ -34,6 +35,11 @@ namespace Data.Services.DataAccess
         public void Delete(string id)
         {
             _items.DeleteOne(item => item.Id == id);
+        }
+
+        public IEnumerable<TodoItemDataAccess> Retrieve()
+        {
+            return _items.Find<TodoItemDataAccess>(item => true).ToEnumerable();
         }
     }
 }
