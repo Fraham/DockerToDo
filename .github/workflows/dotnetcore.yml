@@ -16,4 +16,4 @@ jobs:
     - name: Build with dotnet
       run: cd data; dotnet build --configuration Release
     - name: Run tests
-      run: dotnet test
+      run: cd data; dotnet test
