@@ -10,5 +10,7 @@ namespace Data.Services.BusinessLogic.Interfaces
         TodoItemRetrieve Create(TodoItemCreate item);
 
         void Update(string id, TodoItemUpdate updatedItem);
+
+        TodoItemRetrieve Get(string id);
     }
 }

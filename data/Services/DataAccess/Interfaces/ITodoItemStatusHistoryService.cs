@@ -9,6 +9,8 @@ namespace Data.Services.DataAccess.Interfaces
 
         TodoItemStatusHistoryDataAccess Retrieve(string id);
 
+        IEnumerable<TodoItemStatusHistoryDataAccess> RetrieveByTodoItemId(string todoItemId);
+
         IEnumerable<TodoItemStatusHistoryDataAccess> Retrieve();
 
         void Delete(string id);

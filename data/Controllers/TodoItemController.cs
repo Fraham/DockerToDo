@@ -28,16 +28,7 @@ namespace Data.Controllers
         [HttpGet("{id:length(24)}", Name = "GetTodoItem")]
         public ActionResult<TodoItemRetrieve> Get(string id)
         {
-            /*var TodoItem = _TodoItemService.Get(id);
-
-            if (TodoItem == null)
-            {
-                return NotFound();
-            }
-
-            return TodoItem;*/
-
-            return null;
+            return Ok(_itemService.Get(id));
         }
 
         [HttpPost]

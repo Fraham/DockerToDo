@@ -30,6 +30,14 @@ namespace Data.Services.BusinessLogic
             return TodoItemMapper.ToController(items, history);
         }
 
+        public TodoItemRetrieve Get(string id)
+        {
+            var item = _todoItemService.Retrieve(id);
+            var history = _todoItemStatusHistoryService.RetrieveByTodoItemId(id).ToList();
+
+            return TodoItemMapper.ToController(item, history);
+        }
+
         public TodoItemRetrieve Create(TodoItemCreate item)
         {
             var now = DateTime.UtcNow;
