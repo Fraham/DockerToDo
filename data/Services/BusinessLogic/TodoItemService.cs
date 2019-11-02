@@ -96,5 +96,13 @@ namespace Data.Services.BusinessLogic
                 LastUpdatedDate = date
             });
         }
+
+        public void Delete(string id)
+        {
+            _todoItemStatusHistoryService.RetrieveByTodoItemId(id).ToList()
+                .ForEach(history => _todoItemStatusHistoryService.Delete(history.Id));
+
+            _todoItemService.Delete(id);
+        }
     }
 }

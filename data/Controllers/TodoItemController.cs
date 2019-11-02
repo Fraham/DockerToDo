@@ -50,17 +50,7 @@ namespace Data.Controllers
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id)
         {
-            /* 
-            var TodoItem = _TodoItemService.Get(id);
-
-            if (TodoItem == null)
-            {
-                return NotFound();
-            }
-
-            _TodoItemService.Remove(TodoItem.Id);
-
-            */
+            _itemService.Delete(id);
 
             return NoContent();
         }

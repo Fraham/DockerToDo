@@ -12,5 +12,7 @@ namespace Data.Services.BusinessLogic.Interfaces
         void Update(string id, TodoItemUpdate updatedItem);
 
         TodoItemRetrieve Get(string id);
+
+        void Delete(string id);
     }
 }

@@ -16,6 +16,11 @@ namespace Data.Mappers
 
         public static TodoItemRetrieve ToController(TodoItemDataAccess todoItemInput, List<TodoItemStatusHistoryDataAccess> history)
         {
+            if (todoItemInput == null)
+            {
+                return null;
+            }
+
             return new TodoItemRetrieve
             {
                 Id = todoItemInput.Id,
@@ -35,6 +40,11 @@ namespace Data.Mappers
 
         public static TodoItemStatusHistory ToController(TodoItemStatusHistoryDataAccess history)
         {
+            if (history == null)
+            {
+                return null;
+            }
+
             return new TodoItemStatusHistory
             {
                 DateCreated = history.CreatedDate,
@@ -42,10 +52,15 @@ namespace Data.Mappers
             };
         }
 
-
         public static TodoItemDataAccess ToDataAccess(TodoItemCreate create, DateTime createdDate, TodoItemStatus status = TodoItemStatus.Pending)
         {
-            return new TodoItemDataAccess{
+            if (create == null)
+            {
+                return null;
+            }
+
+            return new TodoItemDataAccess
+            {
                 Title = create.Title,
                 Description = create.Description,
                 Status = status,
