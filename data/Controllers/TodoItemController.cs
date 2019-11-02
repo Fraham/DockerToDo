@@ -51,15 +51,7 @@ namespace Data.Controllers
         [HttpPut("{id:length(24)}")]
         public IActionResult Update(string id, TodoItemUpdate todoItemIn)
         {
-            /*var TodoItem = _TodoItemService.Get(id);
-
-            if (TodoItem == null)
-            {
-                return NotFound();
-            }
-
-            _TodoItemService.Update(id, TodoItemIn);
-            */
+            _itemService.Update(id, todoItemIn);            
 
             return NoContent();
         }

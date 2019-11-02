@@ -6,6 +6,6 @@ namespace Data.Models.Controller.TodoItem
 
         public string Description { get; set; }
 
-        public TodoItemStatus Status { get; set; }
+        public TodoItemStatus? Status { get; set; }
     }
 }

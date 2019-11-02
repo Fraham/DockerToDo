@@ -39,15 +39,54 @@ namespace Data.Services.BusinessLogic
 
             var createdThing = _todoItemService.Create(objectToCreate);
 
-            var history = _todoItemStatusHistoryService.Create(new TodoItemStatusHistoryDataAccess
-            {
-                TodoItemId = createdThing.Id,
-                Status = status,
-                CreatedDate = now,
-                LastUpdatedDate = now
-            });
+            var history = MakeStatusHistory(createdThing.Id, status, now);
 
             return TodoItemMapper.ToController(createdThing, new List<TodoItemStatusHistoryDataAccess> { history });
+        }
+
+        public void Update(string id, TodoItemUpdate updatedItem)
+        {
+            var currentItem = _todoItemService.Retrieve(id);
+
+            if (currentItem == null)
+            {
+                var message = $"Not able to retrieve todo item with Id: {id}";
+
+                _logger.LogError(message);
+                throw new Exception(message);
+            }
+
+            var statusChanged = updatedItem.Status.HasValue && updatedItem.Status.Value != currentItem.Status;
+
+            var now = DateTime.UtcNow;
+
+            var item = new TodoItemDataAccess
+            {
+                Id = currentItem.Id,
+                Title = string.IsNullOrWhiteSpace(updatedItem.Title) ? currentItem.Title : updatedItem.Title,
+                Description = updatedItem.Description == null ? currentItem.Description : updatedItem.Description,
+                Status = !statusChanged ? currentItem.Status : updatedItem.Status.Value,
+                CreatedDate = currentItem.CreatedDate,
+                LastUpdatedDate = now
+            };
+
+            _todoItemService.Update(id, item);
+
+            if (statusChanged)
+            {
+                MakeStatusHistory(id, updatedItem.Status.Value, now);
+            }
+        }
+
+        private TodoItemStatusHistoryDataAccess MakeStatusHistory(string todoItemId, TodoItemStatus status, DateTime date)
+        {
+            return _todoItemStatusHistoryService.Create(new TodoItemStatusHistoryDataAccess
+            {
+                TodoItemId = todoItemId,
+                Status = status,
+                CreatedDate = date,
+                LastUpdatedDate = date
+            });
         }
     }
 }
