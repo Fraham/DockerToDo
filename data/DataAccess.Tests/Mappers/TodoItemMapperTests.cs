@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Data.Mappers;
 using Data.Models;
 using Data.Models.Controller.TodoItem;
+using Data.Models.DataAccess;
 using DataAccess.Helpers;
 using NUnit.Framework;
 
@@ -49,6 +50,30 @@ namespace DataAccess.Tests.Mappers
             var result = TodoItemMapper.ToDataAccess(input, ObjectMaker.Defaults.TodoItems.CreatedDates[index], ObjectMaker.Defaults.TodoItems.Statues[index]);
 
             Assert.AreEqual(ObjectMaker.GetTodoItemDataAccess(index), result);
+        }
+
+        #endregion
+
+        #endregion
+
+        #region ToController
+
+        #region TodoItemStatusHistory
+
+        [Test]
+        public void ToController_TodoItemStatusHistory_Null_Success()
+        {
+            var result = TodoItemMapper.ToController((TodoItemStatusHistoryDataAccess) null);
+
+            Assert.IsNull(result);
+        }
+
+        [Test]
+        public void ToController_TodoItemStatusHistory_Success()
+        {
+            var result = TodoItemMapper.ToController(ObjectMaker.GetTodoItemStatusHistoryDataAccess());
+
+            Assert.AreEqual(ObjectMaker.GetTodoItemStatusHistory(), result);
         }
 
         #endregion

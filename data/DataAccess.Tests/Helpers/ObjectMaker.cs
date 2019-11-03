@@ -11,6 +11,7 @@ namespace DataAccess.Helpers
         {
             public static class TodoItems
             {
+                public const string Id = "5dbced6532a09c0001c54af0";
                 public const string Title = "Default Title";
                 public const string Description = "Default Description";
 
@@ -27,6 +28,15 @@ namespace DataAccess.Helpers
                 public static DateTime[] CreatedDates = { DateTime.Parse("2019-10-01 08:07:06"), DateTime.Parse("2019-10-02 08:07:06"), DateTime.Parse("2019-10-03 08:07:06"), DateTime.Parse("2019-10-04 08:07:06") };
 
                 public static DateTime[] LastUpdatedDates = { DateTime.Parse("2019-10-01 08:07:06"), DateTime.Parse("2019-10-02 08:07:06"), DateTime.Parse("2019-10-03 08:07:06"), DateTime.Parse("2019-10-04 08:07:06") };
+            }
+
+            public class TodoItemHistory
+            {
+                public const string Id = "4dbced6532a09c0001c54af1";
+                public const string TodoItemId = Defaults.TodoItems.Id;
+                public const TodoItemStatus Status = TodoItemStatus.Pending;
+                public static DateTime CreatedDate = DateTime.Parse("2019-10-01 08:07:06");
+                public static DateTime LastUpdatedDate = DateTime.Parse("2019-10-01 08:07:06");
             }
         }
         public static TodoItemCreate GetTodoItemCreate(string title = Defaults.TodoItems.Title, string description = Defaults.TodoItems.Description)
@@ -68,6 +78,27 @@ namespace DataAccess.Helpers
                 Status = Defaults.TodoItems.Statues[index],
                 CreatedDate = Defaults.TodoItems.CreatedDates[index],
                 LastUpdatedDate = Defaults.TodoItems.LastUpdatedDates[index]
+            };
+        }
+
+        public static TodoItemStatusHistoryDataAccess GetTodoItemStatusHistoryDataAccess(string id = Defaults.TodoItemHistory.Id, TodoItemStatus status = Defaults.TodoItemHistory.Status, string todoItemId = Defaults.TodoItemHistory.TodoItemId, DateTime? createdDate = null, DateTime? lastUpdatedDate = null)
+        {
+            return new TodoItemStatusHistoryDataAccess
+            {
+                Id = id,
+                Status = status,
+                TodoItemId = todoItemId,
+                CreatedDate = createdDate ?? Defaults.TodoItemHistory.CreatedDate,
+                LastUpdatedDate = lastUpdatedDate ?? Defaults.TodoItemHistory.LastUpdatedDate
+            };
+        }
+
+        public static TodoItemStatusHistory GetTodoItemStatusHistory(TodoItemStatus status = Defaults.TodoItemHistory.Status, DateTime? createdDate = null)
+        {
+            return new TodoItemStatusHistory
+            {
+                Status = status,
+                CreatedDate = createdDate ?? Defaults.TodoItemHistory.CreatedDate
             };
         }
     }

@@ -6,18 +6,18 @@ namespace Data.Models.Controller.TodoItem
     {
         public TodoItemStatus Status { get; set; }
 
-        public DateTime DateCreated { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         public override bool Equals(object obj)
         {
             return obj is TodoItemStatusHistory history &&
                    Status == history.Status &&
-                   DateCreated == history.DateCreated;
+                   CreatedDate == history.CreatedDate;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Status, DateCreated);
+            return HashCode.Combine(Status, CreatedDate);
         }
     }
 }

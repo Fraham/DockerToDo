@@ -47,7 +47,7 @@ namespace Data.Mappers
 
             return new TodoItemStatusHistory
             {
-                DateCreated = history.CreatedDate,
+                CreatedDate = history.CreatedDate,
                 Status = history.Status
             };
         }
