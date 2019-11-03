@@ -13,5 +13,18 @@ namespace Data.Models.DataAccess
         public DateTime CreatedDate { get; set; }
 
         public DateTime LastUpdatedDate { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is BaseModel model &&
+                   Id == model.Id &&
+                   CreatedDate == model.CreatedDate &&
+                   LastUpdatedDate == model.LastUpdatedDate;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, CreatedDate, LastUpdatedDate);
+        }
     }
 }
