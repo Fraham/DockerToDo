@@ -16,8 +16,9 @@ jobs:
     - name: Build with dotnet
       run: cd data; dotnet build --configuration Release
     - name: Run tests
-      run: cd data; dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput="../coverage/lcov.info" /p:MergeWith="../coverage/lcov.info" /maxcpucount:1
+      run: cd data; dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput="./coverage/lcov.info" /p:MergeWith="./coverage/lcov.info" /maxcpucount:1
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.github_token }}
+        path-to-lcov: ./data/DataAccess.Tests/coverage/lcov.info
