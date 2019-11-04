@@ -78,6 +78,18 @@ namespace DataAccess.Tests.Mappers
 
         #endregion
 
+        #region TodoItemRetrieve
+
+        [Test]
+        public void ToController_TodoItemRetrieve_Null_Success()
+        {
+            var result = TodoItemMapper.ToController((TodoItemDataAccess) null, null);
+
+            Assert.IsNull(result);
+        }
+
+        #endregion
+
         #endregion
     }
 }

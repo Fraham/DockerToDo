@@ -35,6 +35,11 @@ namespace Data.Mappers
 
         public static IList<TodoItemStatusHistory> ToController(List<TodoItemStatusHistoryDataAccess> history)
         {
+            if (history == null)
+            {
+                return new List<TodoItemStatusHistory>();
+            }
+
             return history.Where(item => item != null).Select(ToController).ToList();
         }
 
